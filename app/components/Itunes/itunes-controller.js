@@ -9,7 +9,7 @@ function drawSongs() {
   let template = "";
   for (let i = 0; i < songs.length; i++) {
     template += `
-            <li class="row border rounded mt-2 py-1 shadow-sm">
+            <li class="row border rounded mt-2 py-1 shadow-sm bg-light">
                 <div class="col-2"><img class="img img-fluid" src="${songs[i].albumArt}" alt="" ></div>
                 <div class="col-5 text-left">
                     <h5>${songs[i].artist}</h5>
