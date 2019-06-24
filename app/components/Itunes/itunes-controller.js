@@ -9,7 +9,7 @@ function drawSongs() {
   let template = "";
   for (let i = 0; i < songs.length; i++) {
     template += `
-            <li class="row border mt-1 py-1">
+            <li class="row border rounded mt-2 py-1 shadow-sm">
                 <div class="col-2"><img class="img img-fluid" src="${songs[i].albumArt}" alt="" ></div>
                 <div class="col-5 text-left">
                     <h5>${songs[i].artist}</h5>
@@ -29,6 +29,8 @@ function drawSongs() {
   songElement.innerHTML = template;
 
   document.querySelector('#get-music-button').textContent = 'GET MUSIC'
+
+
   console.log(itunesService.Songs)
 
 }
@@ -38,6 +40,18 @@ function drawSongs() {
 class ItunesController {
   constructor() {
     itunesService.addSubscriber("songs", drawSongs)
+
+
+
+    ///CODE TO ALLOW AUTOPAUSE OF SONGS
+    //note: look up docs for: addeventlistener/play events/handling window and how we got .$_currentlyplaying
+    window.addEventListener("play", function (event) {
+      if (window.$_currentlyPlaying) {
+        window.$_currentlyPlaying.pause();
+      }
+      window.$_currentlyPlaying = event.target;
+    }, true);
+
     drawSongs()
   }
 
